@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Platform</title>
+</head>
+<body>
+    <h1>Survey Platform</h1>
+    <a href="{% url 'create_survey' %}">Create Survey</a>
+    <ul>
+        {% for survey in surveys %}
+            <li><a href="{% url 'survey_detail' survey.pk %}">{{ survey.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ survey.title }}</title>
+</head>
+<body>
+    <h1>{{ survey.title }}</h1>
+    <p>{{ survey.description }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in survey.questions.all %}
+            <label>{{ question.text }}</label><br>
+            {% if question.question_type == 'text' %}
+                <input type="text" name="question_{{ question.pk }}"><br>
+            {% elif question.question_type == 'multiple_choice' %}
+                <input type="text" name="question_{{ question.pk }}"><br>
+            {% elif question.question_type == 'rating' %}
+                <input type="number" name="question_{{ question.pk }}" min="1" max="5"><br>
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
